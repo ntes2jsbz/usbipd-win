@@ -64,7 +64,7 @@ sealed class ConsoleTools_Tests
     }
 
     [TestMethod]
-    [DataRow("VID_80EE&PID_CAFE", false)]
+    [DataRow("VID_81EE&PID_CAFE", false)]
     [DataRow("VID_12AB&PID_34CD", true)]
 
     public void CheckNoStub(string hardwareId, bool noStub)

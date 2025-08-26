@@ -12,6 +12,6 @@ sealed class Interop_VBoxUsb_Tests
     [TestMethod]
     public void GUID_CLASS_VBOXUSB_Value()
     {
-        Assert.AreEqual("{00873fdf-cafe-80ee-aa5e-00c04fb1720b}", GUID_CLASS_VBOXUSB.ToString("B"));
+        Assert.AreEqual("{00873fdf-cafe-81ee-aa5e-00c04fb1720b}", GUID_CLASS_VBOXUSB.ToString("B"));
     }
 }

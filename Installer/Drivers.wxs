@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 SPDX-FileCopyrightText: 2020 Frans van Dorsselaer
 
@@ -11,13 +11,13 @@ SPDX-License-Identifier: GPL-3.0-only
     <Fragment>
         <ComponentGroup Id="Drivers" Directory="APPLICATIONFOLDER" Subdirectory="Drivers" Source="$(var.DriversDir)">
             <File Id="Drivers_README.md" Name="README.md" />
-            <File Id="VBoxUSB.cat" Name="VBoxUSB.cat" />
-            <File Id="VBoxUSB.sys" Name="VBoxUSB.sys" />
-            <File Id="VBoxUSB.inf" Name="VBoxUSB.inf" />
-            <Component Id="VBoxUSBMon.sys">
-                <File Id="VBoxUSBMon.sys" Name="VBoxUSBMon.sys" />
+            <File Id="NtesUSB.cat" Name="NtesUSB.cat" />
+            <File Id="NtesUSB.sys" Name="NtesUSB.sys" />
+            <File Id="NtesUSB.inf" Name="NtesUSB.inf" />
+            <Component Id="NtesUSBMon.sys">
+                <File Id="NtesUSBMon.sys" Name="NtesUSBMon.sys" />
                 <util:EventSource
-                    Name="VBoxUSBMon"
+                    Name="NtesUSBMon"
                     Log="System"
                     EventMessageFile="%SystemRoot%\System32\IoLogMsg.dll"
                     SupportsInformationals="true"

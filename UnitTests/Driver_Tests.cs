@@ -19,7 +19,7 @@ sealed class Driver_Tests
     {
         unsafe // DevSkim: ignore DS172412
         {
-            var inf = new SafeInfHandle(TestPInvoke.SetupOpenInfFile(Path.Combine(platform, "VBoxUSB.inf"), "USB", INF_STYLE.INF_STYLE_WIN4, null));
+            var inf = new SafeInfHandle(TestPInvoke.SetupOpenInfFile(Path.Combine(platform, "NtesUSB.inf"), "USB", INF_STYLE.INF_STYLE_WIN4, null));
 
             Assert.IsFalse(inf.IsInvalid);
 
@@ -35,7 +35,7 @@ sealed class Driver_Tests
             "arm64" => "ARM64",
             _ => throw new ArgumentException("Unsupported platform", nameof(platform)),
         };
-        return $"VBoxUSB.NT{section}";
+        return $"NtesUSB.NT{section}";
     }
 
     static string GetString(SafeInfHandle inf, string section, string key)
@@ -54,7 +54,7 @@ sealed class Driver_Tests
 
     static string GetDriverDescription(SafeInfHandle inf)
     {
-        return GetString(inf, "Strings", "VBoxUSB_DrvDesc");
+        return GetString(inf, "Strings", "NtesUSB_DrvDesc");
     }
 
     [TestMethod]

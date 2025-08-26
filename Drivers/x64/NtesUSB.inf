@@ -1,4 +1,4 @@
-; $Id: VBoxUSB.inf 166130 2024-11-26 12:34:25Z andy $
+; $Id: NtesUSB.inf $
 ;; @file
 ; VBox host drivers - USB drivers - Win32 USB device
 ;
@@ -39,57 +39,57 @@ Signature="$Windows NT$"
 Class=USB
 ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
 provider=%ORACLE%
-DriverVer = 04/11/2025,7.1.8.18469 ; r168469
-CatalogFile=VBoxUSB.cat
-;PnpLockdown=1
+DriverVer = 07/30/2025,7.1.12.19651 ; r169651
+CatalogFile=NtesUSB.cat
+PnpLockdown=1
 
 [SourceDisksNames]
-1=%VBoxUSB_DiskDesc%,,,
+1=%NtesUSB_DiskDesc%,,,
 
 [SourceDisksFiles]
-VBoxUSB.sys = 1
+NtesUSB.sys = 1
 
 [DestinationDirs]
-DefaultDestDir = 10,System32\Drivers
+DefaultDestDir = 12
 
 [Manufacturer]
-%ORACLE%=VBoxUSB,NTAMD64
+%ORACLE%=NtesUSB,NTAMD64
 
-[VBoxUSB.NTAMD64]
-%VBoxUSB_DrvDesc%=VBoxUSB,USB\VID_80EE&PID_CAFE
-CopyFiles=VBoxUSB_CopyFiles
+[NtesUSB.NTAMD64]
+%NtesUSB_DrvDesc%=NtesUSB,USB\VID_81EE&PID_CAFE
+CopyFiles=NtesUSB_CopyFiles
 
-[VBoxUSB.NTAMD64.Services]
-AddService=VBoxUSB,0x00000002,VBoxUSB_Service,VBoxUSB_AddReg
+[NtesUSB.NTAMD64.Services]
+AddService=NtesUSB,0x00000002,NtesUSB_Service,NtesUSB_AddReg
 
 [DefaultUninstall.NTAMD64.Services]
-DelService = VBoxUSB,0x00000200
-DelReg     = VBoxUSB_Registry
+DelService = NtesUSB,0x00000200
+DelReg     = NtesUSB_Registry
 LegacyUninstall=1
 
-[VBoxUSB_Service]
-DisplayName    = %VBoxUSB_SvcDesc%
+[NtesUSB_Service]
+DisplayName    = %NtesUSB_SvcDesc%
 ServiceType    = %SERVICE_TYPE_KERNEL_DRIVER%
 StartType      = %SERVICE_STARTTYPE_DEMAND%
 ErrorControl   = %SERVICE_ERRORCTL_NORMAL%
-ServiceBinary  = %10%\System32\Drivers\VBoxUSB.sys
+ServiceBinary  = %10%\System32\Drivers\NtesUSB.sys
 LoadOrderGroup = Base
 
-[VBoxUSB_AddReg]
-AddReg         = VBoxUSB_Registry
+[NtesUSB_AddReg]
+AddReg         = NtesUSB_Registry
 
-[VBoxUSB_Registry]
+[NtesUSB_Registry]
 HKR,,DevLoader,,*ntkern
-HKR,,NTMPDriver,,VBoxUSB.sys
+HKR,,NTMPDriver,,NtesUSB.sys
 
-[VBoxUSB_CopyFiles]
-VBoxUSB.sys
+[NtesUSB_CopyFiles]
+NtesUSB.sys
 
 [Strings]
 ORACLE="Oracle Corporation"
-VBoxUSB_SvcDesc="VirtualBox USB Service"
-VBoxUSB_DrvDesc="VirtualBox USB Driver"
-VBoxUSB_DiskDesc="VBoxUSB Installation Disk"
+NtesUSB_SvcDesc="NetEase USB Service"
+NtesUSB_DrvDesc="NetEase USB Driver"
+NtesUSB_DiskDesc="NtesUSB Installation Disk"
 
 ; Useful constants
 SERVICE_TYPE_KERNEL_DRIVER = 1

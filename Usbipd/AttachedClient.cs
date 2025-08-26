@@ -66,7 +66,7 @@ sealed class AttachedClient
     //    and follows either path a or b.
     //    See: https://docs.kernel.org/usb/usbip_protocol.html
     // 2) The URB should be canceled (with a race condition of it already being completed, of course).
-    //    On Linux, this is handled alongside with (1), but the VBoxUSB driver cannot cancel individual
+    //    On Linux, this is handled alongside with (1), but the NtesUSB driver cannot cancel individual
     //    URBs; it can only abort entire endpoints, which cancels all URBs for that endpoint at once.
     //    This is very different from Linux; it is handled by the AttachedEndpoint class.
 

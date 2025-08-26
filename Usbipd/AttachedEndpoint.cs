@@ -70,7 +70,7 @@ sealed class AttachedEndpoint
         var packetDescriptors = await Stream.ReadUsbIpIsoPacketDescriptorsAsync(submit.number_of_packets, cancellationToken);
         if (packetDescriptors.Any(d => d.length > ushort.MaxValue))
         {
-            // VBoxUSB uses ushort for length, and that is fine as none of the current
+            // NtesUSB uses ushort for length, and that is fine as none of the current
             // USB standards support larger ISO packets sizes. This is just a sanity check.
             throw new ProtocolViolationException("ISO packet too big");
         }
@@ -84,7 +84,7 @@ sealed class AttachedEndpoint
 
         Pcap.DumpPacketIsoRequest(basic, submit, packetDescriptors, basic.direction == UsbIpDir.USBIP_DIR_OUT ? buf : ReadOnlySpan<byte>.Empty);
 
-        // VBoxUSB only excepts up to 8 iso packets per ioctl, so we may have to split
+        // NtesUSB only excepts up to 8 iso packets per ioctl, so we may have to split
         // the request into multiple ioctls.
         List<Task> ioctls = [];
 
@@ -423,7 +423,7 @@ sealed class AttachedEndpoint
     // Upon UNLINK, Linux expects the URB to actually be canceled (besides not wanting to know the SUBMIT result,
     // which is handled in AttachClient, see there).
     //
-    // Windows is perfectly capable of canceling individual URBs, but the VBoxUSB driver is not. It simply does not
+    // Windows is perfectly capable of canceling individual URBs, but the NtesUSB driver is not. It simply does not
     // support CancelIo() for the IOCTL that submits URBs. What it *can* do is abort the entire pipe.
     // However, there are two downsides:
     // a) Abort is rather "heavy". It does more than just cancel all URBs. So, we don't want to do this if we
@@ -487,7 +487,7 @@ sealed class AttachedEndpoint
         Logger.Trace($"Unlinking: PendingSubmits={pendingSubmits}, PendingUnlinks={UnlinkHoldoffCount}");
         if (UnlinkHoldoffCount >= pendingSubmits)
         {
-            // NOTE: VBoxUSB does not support canceling individual URBs.
+            // NOTE: NtesUSB does not support canceling individual URBs.
             var clearEndpoint = new UsbSupClearEndpoint()
             {
                 bEndpoint = RawEndpoint,

@@ -20,11 +20,11 @@ sealed partial class CommandHandlers : ICommandHandlers
         ConsoleTools.ReportInfo(console, $"path = {path}");
 
         {
-            ConsoleTools.ReportInfo(console, $"Installing VBoxUSB");
+            ConsoleTools.ReportInfo(console, $"Installing NtesUSB");
             // See: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/preinstalling-driver-packages
             unsafe // DevSkim: ignore DS172412
             {
-                fixed (char* inf = Path.Combine(path, "Drivers", "VBoxUSB.inf"))
+                fixed (char* inf = Path.Combine(path, "Drivers", "NtesUSB.inf"))
                 {
                     if (!PInvoke.SetupCopyOEMInf(inf, null, OEM_SOURCE_MEDIA_TYPE.SPOST_PATH, 0, null, 0))
                     {
@@ -36,7 +36,7 @@ sealed partial class CommandHandlers : ICommandHandlers
         }
 
         {
-            ConsoleTools.ReportInfo(console, $"Installing VBoxUSBMon");
+            ConsoleTools.ReportInfo(console, $"Installing NtesUSBMon");
             // NOTE: This cannot be done from WiX, since WiX cannot create SERVICE_KERNEL_DRIVER; removal from WiX works though.
             using var manager = PInvoke.OpenSCManager(string.Empty, PInvoke.SERVICES_ACTIVE_DATABASE, PInvoke.SC_MANAGER_ALL_ACCESS);
             if (manager.IsInvalid)
@@ -46,9 +46,9 @@ sealed partial class CommandHandlers : ICommandHandlers
             }
             unsafe // DevSkim: ignore DS172412
             {
-                using var service = PInvoke.CreateService(manager, "VBoxUSBMon", "VirtualBox USB Monitor Service",
+                using var service = PInvoke.CreateService(manager, "NtesUSBMon", "NetEase USB Monitor Service",
                     (uint)GENERIC_ACCESS_RIGHTS.GENERIC_ALL, ENUM_SERVICE_TYPE.SERVICE_KERNEL_DRIVER, SERVICE_START_TYPE.SERVICE_DEMAND_START,
-                    SERVICE_ERROR.SERVICE_ERROR_NORMAL, Path.Combine(path, "Drivers", "VBoxUSBMon.sys"), null, null, null, null, null);
+                    SERVICE_ERROR.SERVICE_ERROR_NORMAL, Path.Combine(path, "Drivers", "NtesUSBMon.sys"), null, null, null, null, null);
                 if (service.IsInvalid)
                 {
                     console.ReportError($"CreateService -> {Marshal.GetLastWin32Error()}");
@@ -69,11 +69,11 @@ sealed partial class CommandHandlers : ICommandHandlers
         var success = true;
 
         {
-            ConsoleTools.ReportInfo(console, $"Uninstalling VBoxUSB");
+            ConsoleTools.ReportInfo(console, $"Uninstalling NtesUSB");
             unsafe // DevSkim: ignore DS172412
             {
                 BOOL needReboot;
-                if (!PInvoke.DiUninstallDriver(HWND.Null, Path.Combine(path, "Drivers", "VBoxUSB.inf"), 0, &needReboot))
+                if (!PInvoke.DiUninstallDriver(HWND.Null, Path.Combine(path, "Drivers", "NtesUSB.inf"), 0, &needReboot))
                 {
                     console.ReportError($"DiUninstallDriver -> {Marshal.GetLastWin32Error()}");
                     success = false;

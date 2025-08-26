@@ -115,10 +115,10 @@ static class VBoxUsbMon
         public int rc;
     }
 
-    public const string ServiceName = "VBoxUSBMon";
+    public const string ServiceName = "NtesUSBMon";
 
     /// <summary>VBoxUsb: usblib-win.h</summary>
-    public const string USBMON_DEVICE_NAME = @"\\.\VBoxUSBMon";
+    public const string USBMON_DEVICE_NAME = @"\\.\NtesUSBMon";
 
     /// <summary>VBoxUsb: usblib-win.h</summary>
     internal enum SUPUSBFLT_IOCTL : uint

@@ -62,7 +62,7 @@ readonly record struct VidPid
     internal static VidPid FromHardwareOrInstanceId(string input)
     {
         // Examples:
-        //   VID_80EE&PID_CAFE
+        //   VID_81EE&PID_CAFE
         //   USB\\VID_1BCF&PID_28A6\\6&17A81E1D&0&8
         var match = Regex.Match(input, "VID_([0-9a-fA-F]{4})&PID_([0-9a-fA-F]{4})([^0-9a-fA-F]|$)");
         return match.Success

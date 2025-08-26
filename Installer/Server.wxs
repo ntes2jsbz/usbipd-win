@@ -53,13 +53,13 @@ SPDX-License-Identifier: GPL-3.0-only
                     Stop="both"
                     />
                 <!--
-                We have our own VBoxUSBMon custom action service installer for this one, which may clash with
+                We have our own NtesUSBMon custom action service installer for this one, which may clash with
                 VirtualBox or older installations. Therefore, we always create a fresh service instance;
                 we remove the old one and the custom action will set it up correctly no matter what we had before.
                 -->
                 <ServiceControl
-                    Id="VBoxUSBMon"
-                    Name="VBoxUSBMon"
+                    Id="NtesUSBMon"
+                    Name="NtesUSBMon"
                     Remove="both"
                     Stop="both"
                     />
@@ -116,7 +116,7 @@ SPDX-License-Identifier: GPL-3.0-only
 
         <InstallExecuteSequence>
             <!-- Condition: usbipd.exe is installed and will be uninstalled -->
-            <!-- NOTE: first make sure that no devices are using VBoxUSB, or else VBoxUSBMon does not stop -->
+            <!-- NOTE: first make sure that no devices are using NtesUSB, or else NtesUSBMon does not stop -->
             <Custom Action="UnbindAll" Before="StopServices" Condition="(?usbipd.exe=3) AND ($usbipd.exe=2)" />
             <!-- Condition: usbipd.exe is installed and will be uninstalled -->
             <Custom Action="UninstallDrivers" After="StopServices" Condition="(?usbipd.exe=3) AND ($usbipd.exe=2)" />

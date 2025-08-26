@@ -45,7 +45,7 @@ static class VBoxUsb
             {
                 // We act as a "class installer" for USBIP devices. Override the FriendlyName so
                 // Windows device manager shows a nice descriptive name instead of the confusing
-                // "VBoxUSB".
+                // "NtesUSB".
 
                 // Best effort, not really a problem if this fails.
                 ConfigurationManager.SetDeviceFriendlyName(vboxDevice.DeviceNode);
