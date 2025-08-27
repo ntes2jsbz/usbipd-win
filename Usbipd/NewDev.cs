@@ -63,12 +63,14 @@ static class NewDev
                 PInvoke.SetupDiOpenDeviceInfo(deviceInfoSet, originalInstanceId, default, 0, &deviceInfoData)
                     .ThrowOnError(nameof(PInvoke.SetupDiOpenDeviceInfo));
             }
+            var processPath = Environment.ProcessPath;
+            var directoryPath = Path.GetDirectoryName(processPath);
             var deviceInstallParams = new SP_DEVINSTALL_PARAMS_W()
             {
                 cbSize = (uint)Marshal.SizeOf<SP_DEVINSTALL_PARAMS_W>(),
                 Flags = SETUP_DI_DEVICE_INSTALL_FLAGS.DI_ENUMSINGLEINF,
                 FlagsEx = SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_ALLOWEXCLUDEDDRVS,
-                DriverPath = @$"{RegistryUtilities.InstallationFolder ?? throw new UnexpectedResultException("not installed")}\Drivers\NtesUSB.inf",
+                DriverPath = @$"{directoryPath ?? throw new UnexpectedResultException("not installed")}\Drivers\NtesUSB.inf",
             };
             PInvoke.SetupDiSetDeviceInstallParams(deviceInfoSet, deviceInfoData, deviceInstallParams)
                 .ThrowOnError(nameof(PInvoke.SetupDiSetDeviceInstallParams));
