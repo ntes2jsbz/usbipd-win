@@ -24,6 +24,14 @@ SPDX-License-Identifier: GPL-3.0-only
     <OptimizationPreference>Speed</OptimizationPreference>
 
     <AssemblyName>usbipd</AssemblyName>
+
+    <Authors>NetEase</Authors>
+
+    <Company>NetEase</Company>
+
+    <Product>NetEase usbipd-win</Product>
+
+    <Copyright>Copyright (C) NetEase. All rights reserved.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -51,12 +59,12 @@ SPDX-License-Identifier: GPL-3.0-only
 
   <ItemGroup>
     <!-- Copy everything at the top level only, except the REUSE .license files (if any). -->
-    <None Update="WSL\*" CopyToOutputDirectory="PreserveNewest"/>
-    <None Remove="WSL\*\*"/>
-    <None Remove="WSL\*.license"/>
+    <None Update="WSL\*" CopyToOutputDirectory="PreserveNewest" />
+    <None Remove="WSL\*\*" />
+    <None Remove="WSL\*.license" />
     <!-- Also copy everything in the platform directory moving it to the top level, except the REUSE .license files (if any). -->
-    <None Include="WSL\$(Platform)\*" Link="WSL\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest"/>
-    <None Remove="WSL\$(Platform)\*.license"/>
+    <None Include="WSL\$(Platform)\*" Link="WSL\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Remove="WSL\$(Platform)\*.license" />
   </ItemGroup>
 
 </Project>
